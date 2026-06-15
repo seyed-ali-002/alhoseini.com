@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-24 21:13+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\App\templates\breadcrumbs.html:8 .\templates\layout\header-footer.html:73
+#: .\templates\layout\header-footer.html:137
+msgid "Home"
+msgstr ""
+
+#: .\App\templates\index.html:12
+msgid "Anything could be written here!"
+msgstr ""
+
+#: .\App\templates\index.html:13
+msgid "Signup"
+msgstr ""
+
+#: .\App\templates\index.html:14 .\App\templates\index.html:131
+#: .\posts\templates\posts.html:33 .\templates\layout\header-footer.html:77
+#: .\templates\layout\header-footer.html:141
+msgid "Posts"
+msgstr ""
+
+#: .\App\templates\index.html:35 .\App\templates\index.html:147
+#: .\posts\templates\posts.html:51
+msgid "read more"
+msgstr ""
+
+#: .\App\templates\index.html:132 .\posts\templates\posts.html:34
+msgid "Read the latest posts here"
+msgstr ""
+
+#: .\posts\templates\post-detail.html:41
+msgid "Post summary"
+msgstr ""
+
+#: .\posts\templates\post-detail.html:63
+msgid " BACK"
+msgstr ""
+
+#: .\posts\templates\posts.html:17
+msgid "Read all of the posts here from different categories"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:83
+msgid "lang"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:88
+msgid "French"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:91
+msgid "Germany"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:94
+msgid "Arabic"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:127
+msgid "About Us"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:128
+msgid "about us should be here"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:133
+msgid "Links"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:167
+msgid "Social Media"
+msgstr ""
+
+#: .\templates\layout\header-footer.html:168
+msgid "For news & updates follow us"
+msgstr ""

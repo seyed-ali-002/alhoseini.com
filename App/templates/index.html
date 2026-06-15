@@ -1,0 +1,446 @@
+{% extends 'layout/header-footer.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-container">
+                        <h1>Alhosseini.com</h1>
+                        <p class="p-large">{% trans 'Anything could be written here!' %}</p>
+                        <a class="btn-solid-lg" href="">{% trans 'Signup' %}</a>
+                        <a class="btn-outline-lg page-scroll" href="{% url 'posts' %}">{% trans 'Posts' %}</a>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+
+        <!-- Image Slider -->
+        <div class="outer-container">
+            <div class="slider-container">
+                <div class="swiper-container image-slider-1">
+                    <div class="swiper-wrapper">
+
+
+                        {% for latest_post in latest_posts %}
+                            <!-- Slide -->
+                            <div class="swiper-slide">
+                                <div class="col text-center p-2">
+                                    <h3 class="text-light">{{ latest_post.title | safe }}</h3>
+                                    <p class="text-light">
+                                        {{ latest_post.summary | safe }} ...
+                                        <br>
+                                        <a href="{% url 'post-detail' latest_post.slug %}"
+                                           class="text-info">{% trans 'read more' %}</a>
+                                    </p>
+                                    <img class="img-fluid slider-index-img" src="{{ latest_post.image.thumbnail.url }}"
+                                         alt="alternative">
+                                </div>
+                            </div>
+                            <!-- end of slide -->
+                        {% endfor %}
+
+
+                    </div> <!-- end of swiper-wrapper -->
+
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <!-- end of add arrows -->
+
+                </div> <!-- end of swiper-container -->
+            </div> <!-- end of slider-container -->
+        </div> <!-- end of outer-container -->
+        <!-- end of image slider -->
+
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+
+    <!-- Registration -->
+    <div id="register" class="form-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-container">
+                        <h2>Title here</h2>
+                        <p>It's easy to register for the course, just fill out the form and click submit. Then you will
+                            be
+                            registered for one of the best SEO training courses in the industry</p>
+                        <ul class="list-unstyled li-space-lg">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body"><strong>Your information</strong> is required to complete the
+                                    registration
+                                </div>
+                            </li>
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body"><strong>It's safe with us</strong> and will not be used for
+                                    marketing
+                                </div>
+                            </li>
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body"><strong>You will receive</strong> a confirmation email in less
+                                    than
+                                    24h
+                                </div>
+                            </li>
+                        </ul>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form-1 -->
+    <!-- end of registration -->
+
+
+
+
+
+    <!-- Instructor -->
+    <div id="instructor" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img class="img-fluid" src="{% static 'images/instructor.jpg' %}" alt="alternative">
+                </div> <!-- end of col -->
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <h2>I’m Alhosseini</h2>
+                        <p>Hi everybody! I am Garry and I will be your main instructor durnig the SEO training course. I
+                            have more than 10 years experience in SEO and I am very passionate about this field.
+                            Register
+                            for the course and let's meet.</p>
+                        <p>Teaching students all about the beste SEO techniques is something I love to do as a full-time
+                            job</p>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of basic-1 -->
+    <!-- end of instructor -->
+
+    <!-- Posts -->
+    <div class="cards" id="Posts">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>{% trans 'Posts' %}</h2>
+                    <p class="p-heading">{% trans 'Read the most viewed posts here' %} : </p>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for post in posts %}
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-image p-2 h-100">
+                                {#                                {% thumbnail post.image "240x240" crop="center"%}#}
+                                <img class="img-fluid" src="{{ post.image.thumbnail.url }}" alt="{{ post.title }}">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ post.title }}</h4>
+                                <h6 class="card-title">{{ post.category }}</h6>
+                                <p>{{ post.summary | safe }} ... </p>
+                                <a href="{% url 'post-detail' post.slug %}"
+                                   class="btn btn-info text-decoration-none">{% trans 'read more' %}</a>
+                            </div>
+                        </div>
+                        <!-- end of card -->
+                    {% endfor %}
+
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <nav>
+                                {% if page_obj.has_previous %}
+                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                       class="btn px-3 py-1 text-decoration-none"> « </a>
+                                {% endif %}
+
+                                {% for page in page_obj.paginator %}
+                                    <a href="?page={{ page.number }}"
+                                       class="btn px-3 py-1 text-decoration-none{% if page_obj.number == page.number %} btn-dark
+                                    {% endif %}"
+                                    > {{ page.number }} </a>
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}"
+                                       class="btn px-3 py-1 text-decoration-none"> » </a>
+                                {% endif %}
+                            </nav>
+                        </div>
+                    </div>
+
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards -->
+    <!-- end of Posts -->
+
+    {# When comments added #}
+    {#    <!-- Testimonials -->#}
+    {#    <div class="slider-2">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <div class="col-lg-12">#}
+    {#                    <h3>Check out our attendees testimonials from previous editions of the SEO Training</h3>#}
+    {##}
+    {#                    <!-- Text Slider -->#}
+    {#                    <div class="slider-container">#}
+    {#                        <div class="swiper-container text-slider">#}
+    {#                            <div class="swiper-wrapper">#}
+    {##}
+    {#                                <!-- Slide -->#}
+    {#                                <div class="swiper-slide">#}
+    {#                                    <div class="image-wrapper">#}
+    {#                                        <img class="img-fluid" src="images/testimonial-1.jpg" alt="alternative">#}
+    {#                                    </div> <!-- end of image-wrapper -->#}
+    {#                                    <div class="text-wrapper">#}
+    {#                                        <div class="testimonial-text">I took the SEO training course about a year ago#}
+    {#                                            and I#}
+    {#                                            am very happy. It taught me all the basics of search engine optimization and#}
+    {#                                            some tricks.#}
+    {#                                        </div>#}
+    {#                                        <div class="testimonial-author">Jude Thorn - Online Marketer</div>#}
+    {#                                    </div> <!-- end of text-wrapper -->#}
+    {#                                </div> <!-- end of swiper-slide -->#}
+    {#                                <!-- end of slide -->#}
+    {##}
+    {#                                <!-- Slide -->#}
+    {#                                <div class="swiper-slide">#}
+    {#                                    <div class="image-wrapper">#}
+    {#                                        <img class="img-fluid" src="images/testimonial-2.jpg" alt="alternative">#}
+    {#                                    </div> <!-- end of image-wrapper -->#}
+    {#                                    <div class="text-wrapper">#}
+    {#                                        <div class="testimonial-text">Awesome course for the money. I never thought I#}
+    {#                                            could#}
+    {#                                            learn so much about search engine optimization in such a short amount of#}
+    {#                                            time.#}
+    {#                                            Highly recommend.#}
+    {#                                        </div>#}
+    {#                                        <div class="testimonial-author">Roy Smith - Developer</div>#}
+    {#                                    </div> <!-- end of text-wrapper -->#}
+    {#                                </div> <!-- end of swiper-slide -->#}
+    {#                                <!-- end of slide -->#}
+    {##}
+    {#                                <!-- Slide -->#}
+    {#                                <div class="swiper-slide">#}
+    {#                                    <div class="image-wrapper">#}
+    {#                                        <img class="img-fluid" src="images/testimonial-3.jpg" alt="alternative">#}
+    {#                                    </div> <!-- end of image-wrapper -->#}
+    {#                                    <div class="text-wrapper">#}
+    {#                                        <div class="testimonial-text">Corso is the best SEO training course in the#}
+    {#                                            market.#}
+    {#                                            It teaches you all the basics but it also adds value with some advanced tips#}
+    {#                                            &#}
+    {#                                            tricks the are great.#}
+    {#                                        </div>#}
+    {#                                        <div class="testimonial-author">Martin Singer - Online Marketer</div>#}
+    {#                                    </div> <!-- end of text-wrapper -->#}
+    {#                                </div> <!-- end of swiper-slide -->#}
+    {#                                <!-- end of slide -->#}
+    {##}
+    {#                                <!-- Slide -->#}
+    {#                                <div class="swiper-slide">#}
+    {#                                    <div class="image-wrapper">#}
+    {#                                        <img class="img-fluid" src="images/testimonial-4.jpg" alt="alternative">#}
+    {#                                    </div> <!-- end of image-wrapper -->#}
+    {#                                    <div class="text-wrapper">#}
+    {#                                        <div class="testimonial-text">Learning SEO can actually be fun. I attended Corso#}
+    {#                                            SEO#}
+    {#                                            training and I had a great time with my peer students and the instructors.#}
+    {#                                            Highly recommended course.#}
+    {#                                        </div>#}
+    {#                                        <div class="testimonial-author">Ronda Louis - Business Owner</div>#}
+    {#                                    </div> <!-- end of text-wrapper -->#}
+    {#                                </div> <!-- end of swiper-slide -->#}
+    {#                                <!-- end of slide -->#}
+    {##}
+    {#                            </div> <!-- end of swiper-wrapper -->#}
+    {##}
+    {#                            <!-- Add Arrows -->#}
+    {#                            <div class="swiper-button-next"></div>#}
+    {#                            <div class="swiper-button-prev"></div>#}
+    {#                            <!-- end of add arrows -->#}
+    {##}
+    {#                        </div> <!-- end of swiper-container -->#}
+    {#                    </div> <!-- end of slider-container -->#}
+    {#                    <!-- end of text slider -->#}
+    {##}
+    {#                </div> <!-- end of col -->#}
+    {#            </div> <!-- end of row -->#}
+    {#        </div> <!-- end of container -->#}
+    {#    </div> <!-- end of slider-2 -->#}
+    {#    <!-- end of testimonials -->#}
+
+
+    {#    <!-- Date -->#}
+    {#    <div id="date" class="basic-5">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <div class="col-lg-12">#}
+    {#                    <div class="text-container">#}
+    {#                        <h2>December 22nd 2020 at Innovation Hub Space</h2>#}
+    {#                        <p>Our mission is to help people do better SEO. The team is excited to invite you to the next#}
+    {#                            SEO#}
+    {#                            Training Course session which undoubtedly will provide you with the necessary skills to#}
+    {#                            improve#}
+    {#                            your online presence. Fill out the form to register and we'll contact you in less than#}
+    {#                            24h</p>#}
+    {#                        <a class="btn-solid-lg page-scroll" href="#register">REGISTER</a>#}
+    {#                    </div> <!-- end of text-container -->#}
+    {#                </div> <!-- end of col -->#}
+    {#            </div> <!-- end of row -->#}
+    {#        </div> <!-- end of container -->#}
+    {#    </div> <!-- end of basic-5 -->#}
+    {#    <!-- end of date -->#}
+
+
+    {#    <!-- Newsletter -->#}
+    {#    <div class="form-2">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <div class="col-lg-12">#}
+    {#                    <h3>Stay updated with news by subscribing to our newsletter and our social channels</h3>#}
+    {##}
+    {#                    <!-- Newsletter Form -->#}
+    {#                    <form id="newsletterForm" data-toggle="validator" data-focus="false">#}
+    {#                        <div class="form-group">#}
+    {#                            <input type="email" class="form-control-input" id="nemail" required>#}
+    {#                            <label class="label-control" for="nemail">Email</label>#}
+    {#                            <div class="help-block with-errors"></div>#}
+    {#                        </div>#}
+    {#                        <div class="form-group checkbox">#}
+    {#                            <input type="checkbox" id="nterms" value="Agreed-to-Terms" required>I've read and agree to#}
+    {#                            Corso's written <a href="privacy-policy.html">Privacy Policy</a> and <a#}
+    {#                                href="terms-conditions.html">Terms Conditions</a>#}
+    {#                            <div class="help-block with-errors"></div>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <button type="submit" class="form-control-submit-button">SIGN UP</button>#}
+    {#                        </div>#}
+    {#                        <div class="form-message">#}
+    {#                            <div id="nmsgSubmit" class="h3 text-center hidden"></div>#}
+    {#                        </div>#}
+    {#                    </form>#}
+    {#                    <!-- end of newsletter form -->#}
+    {##}
+    {#                    <!-- Social Links -->#}
+    {#                    <div class="icon-container">#}
+    {#                        <span class="fa-stack">#}
+    {#                            <a href="#your-link">#}
+    {#                                <i class="fas fa-circle fa-stack-2x"></i>#}
+    {#                                <i class="fab fa-facebook-f fa-stack-1x"></i>#}
+    {#                            </a>#}
+    {#                        </span>#}
+    {#                        <span class="fa-stack">#}
+    {#                            <a href="#your-link">#}
+    {#                                <i class="fas fa-circle fa-stack-2x"></i>#}
+    {#                                <i class="fab fa-twitter fa-stack-1x"></i>#}
+    {#                            </a>#}
+    {#                        </span>#}
+    {#                        <span class="fa-stack">#}
+    {#                            <a href="#your-link">#}
+    {#                                <i class="fas fa-circle fa-stack-2x"></i>#}
+    {#                                <i class="fab fa-pinterest-p fa-stack-1x"></i>#}
+    {#                            </a>#}
+    {#                        </span>#}
+    {#                        <span class="fa-stack">#}
+    {#                            <a href="#your-link">#}
+    {#                                <i class="fas fa-circle fa-stack-2x"></i>#}
+    {#                                <i class="fab fa-instagram fa-stack-1x"></i>#}
+    {#                            </a>#}
+    {#                        </span>#}
+    {#                        <span class="fa-stack">#}
+    {#                            <a href="#your-link">#}
+    {#                                <i class="fas fa-circle fa-stack-2x"></i>#}
+    {#                                <i class="fab fa-linkedin-in fa-stack-1x"></i>#}
+    {#                            </a>#}
+    {#                        </span>#}
+    {#                    </div> <!-- end of icon-container -->#}
+    {#                    <!-- end of social icons -->#}
+    {##}
+    {#                </div> <!-- end of col -->#}
+    {#            </div> <!-- end of row -->#}
+    {#        </div> <!-- end of container -->#}
+    {#    </div> <!-- end of form-2 -->#}
+    {#    <!-- end of newsletter -->#}
+
+
+    {#    <!-- Contact -->#}
+    {#    <div id="contact" class="form-3">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <div class="col-lg-6">#}
+    {#                    <div class="text-container">#}
+    {#                        <h2>Contact Details</h2>#}
+    {#                        <p>For registration questions please get in touch using the contact details below. For any#}
+    {#                            questions#}
+    {#                            use the form.</p>#}
+    {#                        <h3>Main Office Location</h3>#}
+    {#                        <ul class="list-unstyled li-space-lg">#}
+    {#                            <li class="media">#}
+    {#                                <i class="fas fa-map-marker-alt"></i>#}
+    {#                                <div class="media-body">22 Innovative, San Francisco, CA 94043, US</div>#}
+    {#                            </li>#}
+    {#                            <li class="media">#}
+    {#                                <i class="fas fa-mobile-alt"></i>#}
+    {#                                <div class="media-body">+44 68 554 332, &nbsp;&nbsp;<i class="fas fa-mobile-alt"></i>&nbsp;#}
+    {#                                    +44 31 276 112#}
+    {#                                </div>#}
+    {#                            </li>#}
+    {#                            <li class="media">#}
+    {#                                <i class="fas fa-envelope"></i>#}
+    {#                                <div class="media-body"><a class="light-gray" href="mailto:contact@zigo.com">contact@zigo.com</a>#}
+    {#                                    <i class="fas fa-globe"></i><a class="light-gray" href="#your-link">www.zigo.com</a>#}
+    {#                                </div>#}
+    {#                            </li>#}
+    {#                        </ul>#}
+    {#                    </div> <!-- end of text-container -->#}
+    {#                </div> <!-- end of col -->#}
+    {#                <div class="col-lg-6">#}
+    {##}
+    {#                    <!-- Contact Form -->#}
+    {#                    <form id="contactForm" data-toggle="validator" data-focus="false">#}
+    {#                        <div class="form-group">#}
+    {#                            <input type="text" class="form-control-input" id="cname" required>#}
+    {#                            <label class="label-control" for="cname">Name</label>#}
+    {#                            <div class="help-block with-errors"></div>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <input type="email" class="form-control-input" id="cemail" required>#}
+    {#                            <label class="label-control" for="cemail">Email</label>#}
+    {#                            <div class="help-block with-errors"></div>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <textarea class="form-control-textarea" id="cmessage" required></textarea>#}
+    {#                            <label class="label-control" for="cmessage">Your message</label>#}
+    {#                            <div class="help-block with-errors"></div>#}
+    {#                        </div>#}
+    {#                        <div class="form-group checkbox">#}
+    {#                            <input type="checkbox" id="cterms" value="Agreed-to-Terms" required>I have read and agree to#}
+    {#                            Corso's stated <a href="privacy-policy.html">Privacy Policy</a> and <a#}
+    {#                                href="terms-conditions.html">Terms Conditions</a>#}
+    {#                            <div class="help-block with-errors"></div>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <button type="submit" class="form-control-submit-button">SUBMIT</button>#}
+    {#                        </div>#}
+    {#                        <div class="form-message">#}
+    {#                            <div id="cmsgSubmit" class="h3 text-center hidden"></div>#}
+    {#                        </div>#}
+    {#                    </form>#}
+    {#                    <!-- end of contact form -->#}
+    {##}
+    {#                </div> <!-- end of col -->#}
+    {#            </div> <!-- end of row -->#}
+    {#        </div> <!-- end of container -->#}
+    {#    </div> <!-- end of form-3 -->#}
+    {#    <!-- end of contact -->#}
+{% endblock %}

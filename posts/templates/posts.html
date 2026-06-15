@@ -1,0 +1,87 @@
+{% extends 'layout/header-footer.html' %}
+{% load static %}
+{% load i18n %}
+{% load render_partial %}
+{% load imagekit %}
+
+{% block title %}
+    All Posts
+{% endblock %}
+
+{% block content %}
+    <!-- Header -->
+    <header id="header" class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="white">{% trans 'Read all of the posts here from different categories' %}</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+    {% render_partial 'breadcrumbs' %}
+
+
+    <!-- Posts -->
+    <div class="cards" id="Posts">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>{% trans 'Posts' %}</h2>
+                    <p class="p-heading">{% trans 'Read the latest posts here' %} : </p>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for post in posts %}
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-image p-2 h-100">
+                                {#                                {% thumbnail post.image "240x240" crop="center"%}#}
+                                <img class="img-fluid" src="{{ post.image.thumbnail.url }}" alt="{{ post.title }}">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ post.title }}</h4>
+                                <h6 class="card-title"> - {{ post.category }} - </h6>
+                                <hr>
+                                <p>{{ post.summary | safe }} ... </p>
+                                <a href="{% url 'post-detail' post.slug %}"
+                                   class="btn btn-info text-decoration-none">{% trans 'read more' %}</a>
+                            </div>
+                        </div>
+                        <!-- end of card -->
+                    {% endfor %}
+
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <nav>
+                                {% if page_obj.has_previous %}
+                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                       class="btn px-3 py-1 text-decoration-none"> « </a>
+                                {% endif %}
+
+                                {% for page in page_obj.paginator %}
+                                    <a href="?page={{ page.number }}"
+                                       class="btn px-3 py-1 text-decoration-none{% if page_obj.number == page.number %} btn-dark
+                                    {% endif %}"
+                                    > {{ page.number }} </a>
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}"
+                                       class="btn px-3 py-1 text-decoration-none"> » </a>
+                                {% endif %}
+                            </nav>
+                        </div>
+                    </div>
+
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards -->
+    <!-- end of Posts -->
+{% endblock %}

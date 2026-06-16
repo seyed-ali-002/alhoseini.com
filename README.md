@@ -1,4 +1,7 @@
 # Alhoseini.com
+---
+Still on production - هنوز در حال توسعه
+---
 
 A multilingual content management platform built with Django, designed for global content publishing with a focus on educational and informational content.
 
@@ -48,7 +51,7 @@ Alhosseini.com is a production-ready CMS that demonstrates the implementation of
 
 ---
 
-# Alhoseini.com
+# وبسایت alhoseini.com
 
 یک پلتفرم مدیریت محتوای چندزبانه ساخته شده با جنگو، طراحی شده برای انتشار محتوای آموزشی و اطلاعاتی در سطح جهانی.
 
